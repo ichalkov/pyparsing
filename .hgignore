@@ -1,0 +1,13 @@
+syntax: glob
+*.pyc
+.*.swp
+
+syntax: regexp
+^\.cache\/
+^\.coverage$
+^.+\.egg-info\/
+\.Python
+^build\/
+^coverage\.xml$
+^dist\/
+^venv\/

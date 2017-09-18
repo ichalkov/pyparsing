@@ -1,0 +1,8 @@
+  leading
+trailing  
+  both  
+neither
+trailing tab	
+	leading tab
+
+neither again

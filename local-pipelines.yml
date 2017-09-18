@@ -1,0 +1,34 @@
+# vi:et:ts=2 sw=2 sts=2
+image: python:3
+pipelines:
+  default:
+    - step:
+        script:
+          - set -ex
+          - find . -type f -iname "*.pyc" -exec rm -f {} \; || true
+          - find . -type d -iname __pycache__ -exec rm -rf {} \; || true
+          - pip install -r dev-requirements.txt
+          - flake8
+          - PYTHONPATH=$(pwd)/src py.test --color=auto --cov=pyparser --cov-report=term-missing tests
+          - pip install .
+    - step:
+        image: python:2
+        script:
+          - set -ex
+          - find . -type f -iname "*.pyc" -exec rm -f {} \; || true
+          - find . -type d -iname __pycache__ -exec rm -rf {} \; || true
+          - pip install -r dev-requirements.txt
+          - flake8
+          - PYTHONPATH=$(pwd)/src py.test --color=auto --cov=pyparser --cov-report=term-missing tests
+          - pip install .
+    - step:
+        image: python:3.6
+        script:
+          - set -ex
+          - find . -type f -iname "*.pyc" -exec rm -f {} \; || true
+          - find . -type d -iname __pycache__ -exec rm -rf {} \; || true
+          - pip install -r dev-requirements.txt
+          - flake8
+          - PYTHONPATH=$(pwd)/src py.test --color=auto --cov=pyparser --cov-report=term-missing tests
+          - pip install .
+
